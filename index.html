@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PORTFOLIO SINTYA CAHYANI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .clock {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border: 10px solid #333;
+        border-radius: 50%;
+        margin: 20px auto;
+        background: white;
+    }
+    .hand {
+        position: absolute;
+        background: #333;
+        transform-origin: bottom;
+        bottom: 50%;
+        left: 50%;
+        transform: translateX(-50%) scaleX(-1);
+    }
+    .hour {
+        height: 50px;
+        width: 6px;
+        background: #333;
+        z-index: 3;
+    }
+    .minute {
+        height: 70px;
+        width: 4px;
+        background: #666;
+        z-index: 2;
+    }
+    .second {
+        height: 90px;
+        width: 2px;
+        background: red;
+        z-index: 1;
+    }
+    .numbers {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        font-size: 1.5rem;
+        color: #333;
+    }
+    .number {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        transform: translate(-50%, -50%);
+    }
+    .card {
+        background-color: #f8f9fa; /* Warna latar belakang */
+        border: 1px solid #007bff; /* Border berwarna biru */
+        border-radius: 10px; /* Sudut melengkung */
+        transition: transform 0.2s; /* Efek transisi */
+    }
+    .card:hover {
+        transform: scale(1.05); /* Zoom saat hover */
+    }
+    .card-title {
+        color: #007bff; /* Warna judul */
+    }
+    .card-img-top {
+        border-radius: 10px 10px 0 0; /* Sudut melengkung pada gambar */
+    }
+    .modal-header {
+        background-color: #007bff; /* Warna header modal */
+        color: white; /* Warna teks header modal */
+    }
+</style>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color:#659287;">
+        <div class="container">
+            <a class="navbar-brand" href="#">SINTYA CAHYANI </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="jumbotron text-center" style="background-color: #F9C0AB;">
+        <img src="img/tya.jpg" class="rounded-circle" style="width: 300px; height: 300px;">
+        <h1 class="display-4">TYAA</h1>
+        <p class="lead">Perkenalkan Nama Saya Sintya Cahyani, Mahasiswa <hr> Semester 1 Prodi Teknik Informatika</p>
+        <BR></BR>
+        <p class="lead"> NIM : 24010033</p>
+    </section>
+
+    <!-- About Section -->
+    <div class="container">
+        <h1>PROGRAM</h1>
+        <div class="row">
+            <!-- Hello World Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello World</h5>
+                        <p>INI ADALAH TUGAS PROGRAM HELLO WORLD</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#helloWorldModal">
+                            Tampilkan Hello World
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!-- Luas Persegi Panjang Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Luas Persegi Panjang</h5>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#luasPersegiModal">
+                            Hitung Luas
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temperature Converter Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Temperature Converter</h5>
+                        <div class="form-group">
+                            <label for="tempInput">Enter Temperature:</label>
+                            <input type="number" class="form-control" id="tempInput" placeholder="Temperature">
+                        </div>
+                        <div class="form-group">
+                            <label for="conversionType">Conversion Type:</label>
+                            <select class="form-control" id="conversionType">
+                                <option value="CtoF">Celsius to Fahrenheit</option>
+                                <option value="FtoC">Fahrenheit to Celsius</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="convertBtn" data-toggle="modal" data-target="#resultModal">Convert</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="clock">
+                    <div id="hour" class="hand hour"></div>
+                    <div id="min" class="hand minute"></div>
+                    <div id="sec" class="hand second"></div>
+                    <div class="numbers">
+                        <div class="number" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">12</div>
+                        <div class="number" style="top: 17%; left: 70%; transform: translate(-50%, -50%);">1</div>
+                        <div class="number" style="top: 32%; left: 85%; transform: translate(-50%, -50%);">2</div>
+                        <div class="number" style="top: 50%; left: 90%; transform: translate(-50%, -50%);">3</div>
+                        <div class="number" style="top: 68%; left: 83%; transform: translate(-50%, -50%);">4</div>
+                        <div class="number" style="top: 83%; left: 70%; transform: translate(-50%, -50%);">5</div>
+                        <div class="number" style="top: 90%; left: 50%; transform: translate(-50%, -50%);">6</div>
+                        <div class="number" style="top: 83%; left: 31%; transform: translate(-50%, -50%);">7</div>
+                        <div class="number" style="top: 68%; left: 17%; transform: translate(-50%, -50%);">8</div>
+                        <div class="number" style="top: 50%; left: 10%; transform: translate(-50%, -50%);">9</div>
+                        <div class="number" style="top: 32%; left: 15%; transform: translate(-50%, -50%);">10</div>
+                        <div class="number" style="top: 17%; left: 30%; transform: translate(-50%, -50%);">11</div>
+                    </div>
+                </div>
+            
+                <div class="card-body">
+                    <h5 class="card-title">Jam Dinding Analog</h5>
+                    <p>Program ini menampilkan jam dinding analog yang menunjukkan waktu saat ini.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    <!-- Modal untuk Hello World -->
+    <div class="modal fade" id="helloWorldModal" tabindex="-1" role="dialog" aria-labelledby="helloWorldLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helloWorldLabel">Hello World</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Hello World!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Luas Persegi Panjang -->
+    <div class="modal fade" id="luasPersegiModal" tabindex="-1" role="dialog" aria-labelledby="luasPersegiLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="luasPersegiLabel">Luas Persegi Panjang</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Masukkan panjang dan lebar:</p>
+                    <input type="number" id="panjang" placeholder="Panjang" class="form-control mb-2">
+                    <input type="number" id="lebar" placeholder="Lebar" class="form-control mb-2">
+                    <button type="button" class="btn btn-success" onclick="hitungLuas()">Hitung</button>
+                    <div id="luasResult" class="mt-2"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Temperature Converter -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Conversion Result</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="resultContent">
+                    <!-- Conversion result will be displayed here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function hitungLuas() {
+            const panjang = document.getElementById('panjang').value;
+            const lebar = document.getElementById('lebar').value;
+            const luas = panjang * lebar;
+            document.getElementById('luasResult').innerText = `Luas: ${luas}`;
+        }
+
+        document.getElementById("convertBtn").addEventListener("click", function() {
+            const temperature = parseFloat(document.getElementById("tempInput").value);
+            const conversionType = document.getElementById("conversionType").value;
+            let result;
+
+            if (conversionType === "CtoF") {
+                result = (temperature * 9/5) + 32;
+                result = `${temperature}°C is ${result.toFixed(2)}°F`;
+            } else if (conversionType === "FtoC") {
+                result = (temperature - 32) * 5/9;
+                result = `${temperature}°F is ${result.toFixed(2)}°C`;
+            }
+
+            document.getElementById("resultContent").innerText = result;
+        });
+
+
+        function updateClock() {
+    const now = new Date();
+
+    // Hitung waktu WIB (UTC+7)
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000; // Konversi waktu ke UTC
+    const wib = new Date(utc + 7 * 3600000); // Tambahkan offset 7 jam untuk WIB
+
+    const hh = wib.getHours();
+    const mm = wib.getMinutes();
+    const ss = wib.getSeconds();
+
+    // Perhitungan rotasi jarum
+    const hRotation = 30 * hh + mm / 2; // 30 derajat per jam, 0.5 per menit
+    const mRotation = 6 * mm;          // 6 derajat per menit
+    const sRotation = 6 * ss;          // 6 derajat per detik
+
+    // Set rotasi pada masing-masing elemen
+    document.getElementById('hour').style.transform = `rotate(${hRotation}deg)`;
+    document.getElementById('min').style.transform = `rotate(${mRotation}deg)`;
+    document.getElementById('sec').style.transform = `rotate(${sRotation}deg)`;
+}
+
+// Jalankan setiap detik
+setInterval(updateClock, 1000);
+updateClock(); // Inisialisasi
+        i
+
+    </script>
+</body>
+</html>
